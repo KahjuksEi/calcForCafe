@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div class="mainInputs">
+    <input type="number" placeholder="Введите общее число кристаллов" id="allCrist"><br>
+    <input type="number" placeholder="Введите общее число рубинов" id="allRuby">
+    <div class="sumCup">Всего кубков: </div>
+  </div>
+  <div id="playersBlocks">
+    <div class="playersBlock"><input type="number" placeholder="введите кубки игрока" class="plCup"></div>
+    <div class="playersBlock"><input type="number" placeholder="введите кубки игрока" class="plCup"></div>
+    <div class="playersBlock"><input type="number" placeholder="введите кубки игрока" class="plCup"></div>
+    <div class="playersBlock"><input type="number" placeholder="введите кубки игрока" class="plCup"></div>
+    <div class="playersBlock"><input type="number" placeholder="введите кубки игрока" class="plCup"></div>
+    <div class="playersBlock"><input type="number" placeholder="введите кубки игрока" class="plCup"></div>
+    <div class="playersBlock"><input type="number" placeholder="введите кубки игрока" class="plCup"></div>
+    <div class="playersBlock"><input type="number" placeholder="введите кубки игрока" class="plCup"></div>
+    <div class="playersBlock"><input type="number" placeholder="введите кубки игрока" class="plCup"></div>
+    <div class="playersBlock"><input type="number" placeholder="введите кубки игрока" class="plCup"></div>
+    <div class="playersBlock"><input type="number" placeholder="введите кубки игрока" class="plCup"></div>
+    <div class="playersBlock"><input type="number" placeholder="введите кубки игрока" class="plCup"></div>
+    <div class="playersBlock"><input type="number" placeholder="введите кубки игрока" class="plCup"></div>
+    <div class="playersBlock"><input type="number" placeholder="введите кубки игрока" class="plCup"></div>
+    <div class="playersBlock"><input type="number" placeholder="введите кубки игрока" class="plCup"></div>
+  </div>
+  <button id="addButton">ADD PLAYER</button>
+  <button id="countButton">COUNT</button>
+</body>
+</html>
+<script>
+  var allCrist = document.getElementById('allCrist');
+  var allRuby = document.getElementById('allRuby');
+  var countButton = document.getElementById('countButton');
+  var addButton = document.getElementById('addButton');
+  var playersCup = document.querySelectorAll('.plCup');
+  var playersBlocks = document.getElementById('playersBlocks');
+  var playersBlock = document.querySelectorAll('.playersBlock');
+  var sumCup = document.querySelector('.sumCup');
+  var sum = 0;
+  var paymentCup = 0;
+
+  /*addButton.onclick = function(){
+    var newPlBlock = document.createElement("div");
+    newPlBlock.classList.add('playersBlock');
+    newPlBlock.innerHTML = '<input type="number" placeholder="введите кубки игрока" class="plCup">';
+    playersBlocks.appendChild(newPlBlock);
+  }*/
+ 
+  countButton.onclick = function (){
+
+    for(i=0;i<playersBlock.length; i++){
+      playersBlock[i].style.display = "flex";
+      playersBlock[i].style.border = "2px dotted #FFCC66";
+    }
+    
+    for(i=0;i< playersCup.length; i++){
+      var num = Number(playersCup[i].value); 
+      sum += num;
+    }
+    
+    for(i=0;i< playersCup.length; i++){
+      var dole = Number(playersCup[i].value) / sum; 
+      var doleCrist = Math.round(dole * allCrist.value);
+      var qCrist = document.createElement("strong");
+      qCrist.classList.add('strongCrist');
+      qCrist.innerHTML = 'Доля кристаллов: ' + doleCrist + '&nbsp';
+      playersCup[i].parentElement.appendChild(qCrist);
+      var doleRuby = Math.round(dole * allRuby.value);
+      var qRuby = document.createElement("strong");
+      qRuby.classList.add('strongRuby');
+      qRuby.innerHTML = 'Доля рубинов: ' + doleRuby;
+      playersCup[i].parentElement.appendChild(qRuby);
+    }
+      sumCup.innerHTML = 'Всего кубков: ' + sum;
+};
+</script>
+
+<style>
+  body{ margin: 2% auto;text-align: center;background-color: navajowhite;font-family: sans-serif;}
+  .mainInputs{display: flex;width: 666px;justify-content: space-between;margin: auto;align-items: center;}
+  #allCrist{background-color:lightblue;}
+  #allRuby{background-color:lightpink;}
+  .strongCrist{color:dodgerblue;}
+  .strongRuby{color: tomato;}
+  input{height: 20px;border: 2px solid #FFCC66;border-radius: 4px;margin: 1px;padding-left: 6px;width: 230px;}
+  #countButton{background-color: #00CC33; color: white;font-weight: bold;border-radius: 4px;width: 116px;
+  padding:6px;border: none;}
+  #countButton:hover{background-color: #00FF33;}
+  #addButton:hover{background-color:indianred;}
+  #addButton{background-color: orange;font-weight: bold;border-radius: 4px;width: 116px;padding:6px;border: none;}
+  #playersBlocks{display: flex;flex-direction: column;margin-bottom: 12px;}
+  .playersBlock{align-items: center;width: 540px;margin:1px auto;}
+</style>
