@@ -12,47 +12,35 @@
     <input type="number" placeholder="Введите общее число рубинов" id="allRuby">
     <div class="sumCup">Всего кубков: </div>
   </div>
-  <div id="playersBlocks">
-    <div class="playersBlock"><input type="number" placeholder="введите кубки игрока" class="plCup"></div>
-    <div class="playersBlock"><input type="number" placeholder="введите кубки игрока" class="plCup"></div>
-    <div class="playersBlock"><input type="number" placeholder="введите кубки игрока" class="plCup"></div>
-    <div class="playersBlock"><input type="number" placeholder="введите кубки игрока" class="plCup"></div>
-    <div class="playersBlock"><input type="number" placeholder="введите кубки игрока" class="plCup"></div>
-    <div class="playersBlock"><input type="number" placeholder="введите кубки игрока" class="plCup"></div>
-    <div class="playersBlock"><input type="number" placeholder="введите кубки игрока" class="plCup"></div>
-    <div class="playersBlock"><input type="number" placeholder="введите кубки игрока" class="plCup"></div>
-    <div class="playersBlock"><input type="number" placeholder="введите кубки игрока" class="plCup"></div>
-    <div class="playersBlock"><input type="number" placeholder="введите кубки игрока" class="plCup"></div>
-    <div class="playersBlock"><input type="number" placeholder="введите кубки игрока" class="plCup"></div>
-    <div class="playersBlock"><input type="number" placeholder="введите кубки игрока" class="plCup"></div>
-    <div class="playersBlock"><input type="number" placeholder="введите кубки игрока" class="plCup"></div>
-    <div class="playersBlock"><input type="number" placeholder="введите кубки игрока" class="plCup"></div>
-    <div class="playersBlock"><input type="number" placeholder="введите кубки игрока" class="plCup"></div>
-  </div>
-  <button id="addButton">ADD PLAYER</button>
+
+  <div id="playersBlocks"></div>
+
   <button id="countButton">COUNT</button>
+
 </body>
 </html>
 <script>
+
+  var playersBlocks = document.getElementById('playersBlocks');
+  
+  for(var i=0;i<=15;i++){
+    var playersBlock = document.createElement("div");
+    playersBlock.innerHTML = '<input type="number" placeholder="введите кубки игрока" class="plCup">';
+    playersBlock.classList.add('playersBlock');
+    playersBlocks.appendChild(playersBlock);
+    
+  }
   var allCrist = document.getElementById('allCrist');
   var allRuby = document.getElementById('allRuby');
   var countButton = document.getElementById('countButton');
   var addButton = document.getElementById('addButton');
   var playersCup = document.querySelectorAll('.plCup');
-  var playersBlocks = document.getElementById('playersBlocks');
   var playersBlock = document.querySelectorAll('.playersBlock');
   var sumCup = document.querySelector('.sumCup');
   var sum = 0;
   var paymentCup = 0;
 
-  /*addButton.onclick = function(){
-    var newPlBlock = document.createElement("div");
-    newPlBlock.classList.add('playersBlock');
-    newPlBlock.innerHTML = '<input type="number" placeholder="введите кубки игрока" class="plCup">';
-    playersBlocks.appendChild(newPlBlock);
-  }*/
- 
-  countButton.onclick = function (){
+  countButton.onclick = function mainOnclickFunction(){
 
     for(i=0;i<playersBlock.length; i++){
       playersBlock[i].style.display = "flex";
@@ -63,37 +51,116 @@
       var num = Number(playersCup[i].value); 
       sum += num;
     }
-    
+ 
     for(i=0;i< playersCup.length; i++){
       var dole = Number(playersCup[i].value) / sum; 
+      
       var doleCrist = Math.round(dole * allCrist.value);
-      var qCrist = document.createElement("strong");
+      var qCrist = document.createElement("span");
       qCrist.classList.add('strongCrist');
-      qCrist.innerHTML = 'Доля кристаллов: ' + doleCrist + '&nbsp';
+      qCrist.innerHTML = 'Доля<br>кристаллов:<br>' + doleCrist + '&nbsp';
       playersCup[i].parentElement.appendChild(qCrist);
+
       var doleRuby = Math.round(dole * allRuby.value);
-      var qRuby = document.createElement("strong");
+      var qRuby = document.createElement("span");
       qRuby.classList.add('strongRuby');
-      qRuby.innerHTML = 'Доля рубинов: ' + doleRuby;
+      qRuby.innerHTML = 'Доля<br>рубинов:<br>' + doleRuby;
       playersCup[i].parentElement.appendChild(qRuby);
+      
+      var selectSpicy = document.createElement("div");
+      selectSpicy.classList.add('spicyItems');
+      selectSpicy.innerHTML = '<div class="counter"><button class="counter__btn" data-direction="plus" data-spice="guarana">+</button><label for="type="text">Гуарана<input type="text" value="0" class="counter__value"></label><button class="counter__btn" data-direction="minus" data-spice="guarana">-</button></div>';
+      selectSpicy.innerHTML += '<div class="counter"><button class="counter__btn" data-direction="plus" data-spice="zhen">+</button><label for="type="text">Женьшень<input type="text" value="0" class="counter__value"></label><button class="counter__btn" data-direction="minus" data-spice="zhen">-</button></div>';
+      selectSpicy.innerHTML += '<div class="counter"><button class="counter__btn" data-direction="plus" data-spice="shafran">+</button><label for="type="text">Шафран<input type="text" value="0" class="counter__value"></label><button class="counter__btn" data-direction="minus" data-spice="shafran">-</button></div>';
+      selectSpicy.innerHTML += '<div class="counter"><button class="counter__btn" data-direction="plus" data-spice="gold">+</button><label for="type="text">Золото<input type="text" value="0" class="counter__value"></label><button class="counter__btn" data-direction="minus" data-spice="gold">-</button></div>';
+      selectSpicy.innerHTML += '<div class="counter"><button class="counter__btn" data-direction="plus" data-spice="tapioka">+</button><label for="type="text">Тапиока<input type="text" value="0" class="counter__value"></label><button class="counter__btn" data-direction="minus" data-spice="tapioka">-</button></div>';
+      selectSpicy.innerHTML += '<div class="counter"><button class="counter__btn" data-direction="plus" data-spice="anis">+</button><label for="type="text">Анис<input type="text" value="0" class="counter__value"></label><button class="counter__btn" data-direction="minus" data-spice="anis">-</button></div>';
+      selectSpicy.innerHTML += '<div class="counter"><button class="counter__btn" data-direction="plus" data-spice="muskat">+</button><label for="type="text">Мускат<input type="text" value="0" class="counter__value"></label><button class="counter__btn" data-direction="minus" data-spice="muskat">-</button></div>';
+      selectSpicy.innerHTML += '<div class="counter"><button class="counter__btn" data-direction="plus" data-spice="rose">+</button><label for="type="text">Лепестки розы<input type="text" value="0" class="counter__value"></label><button class="counter__btn" data-direction="minus" data-spice="rose">-</button></div>';
+      selectSpicy.innerHTML += '<div class="counter"><button class="counter__btn" data-direction="plus" data-spice="kalgan">+</button><label for="type="text">Калган<input type="text" value="0" class="counter__value"></label><button class="counter__btn" data-direction="minus" data-spice="kalgan">-</button></div>';
+      selectSpicy.innerHTML += '<div class="counter"><button class="counter__btn" data-direction="plus" data-spice="kardamon">+</button><label for="type="text">Кардамон<input type="text" value="0" class="counter__value"></label><button class="counter__btn" data-direction="minus" data-spice="kardamon">-</button></div>';
+      selectSpicy.innerHTML += '<div class="counter"><button class="counter__btn" data-direction="plus" data-spice="badyan">+</button><label for="type="text">Бадьян<input type="text" value="0" class="counter__value"></label><button class="counter__btn" data-direction="minus" data-spice="badyan">-</button></div>';
+      playersCup[i].parentElement.appendChild(selectSpicy);
+
+      var blockNumber = document.createElement("div");
+      blockNumber.classList.add('blockNumber');
+      blockNumber.innerHTML = `${doleCrist}`;
+      playersCup[i].parentElement.appendChild(blockNumber);
+
     }
+
+    /*расчет специй*/
+    
+
+    var btns = document.querySelectorAll('.counter__btn');
+      btns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+
+      var direction = this.dataset.direction;
+      var dataSpice = this.dataset.spice;
+      var inp = this.parentElement.querySelector('.counter__value');
+      var currentValue = +inp.value;
+      var newValue = void 0;
+      var spiceValue = 0;
+      switch(dataSpice){
+        case "guarana": spiceValue=21;break
+        case "zhen": spiceValue=11;break
+        case "shafran": spiceValue=33;break;
+        case "gold": spiceValue=41;break;
+        case "tapioka": spiceValue=20;break;
+        case "anis": spiceValue=4;break;
+        case "muskat": spiceValue=7;break;
+        case "rose": spiceValue=3;break;
+        case "kalgan": spiceValue=12;break;
+        case "kardamon": spiceValue=19;break;
+        case "badyan": spiceValue=6;break;
+      }
+      var blockNumbers = document.querySelectorAll('.blockNumber');
+        for(i=0;i<blockNumbers.length;i++){
+        var doleCrist = +blockNumbers[i].innerHTML;
+
+      if (direction === 'plus') {
+        newValue = currentValue + spiceValue;
+        blockNumbers[i].innerHTML = doleCrist - spiceValue;
+      } else {
+        newValue = currentValue - spiceValue > 0 ? currentValue - spiceValue : 0;
+        blockNumbers[i].innerHTML = doleCrist + spiceValue;
+      }
+      inp.value = newValue;
+      }
+
+    });
+  });
+
+
+    
+    
       sumCup.innerHTML = 'Всего кубков: ' + sum;
 };
+
+
 </script>
 
 <style>
-  body{ margin: 2% auto;text-align: center;background-color: navajowhite;font-family: sans-serif;}
+  body{ margin: 0 auto;padding:30px;background-color: navajowhite;font-family: sans-serif;}
   .mainInputs{display: flex;width: 666px;justify-content: space-between;margin: auto;align-items: center;}
+  .mainInputs input{width: 200px;}
+  input{height: 20px;border: 2px solid #FFCC66;border-radius: 4px;margin: 1px;padding-left: 6px;}
   #allCrist{background-color:lightblue;}
   #allRuby{background-color:lightpink;}
-  .strongCrist{color:dodgerblue;}
+  .strongCrist{color:dodgerblue;padding: 0px 12px;}
   .strongRuby{color: tomato;}
-  input{height: 20px;border: 2px solid #FFCC66;border-radius: 4px;margin: 1px;padding-left: 6px;width: 230px;}
+  .plCup{width: 150px;}
   #countButton{background-color: #00CC33; color: white;font-weight: bold;border-radius: 4px;width: 116px;
   padding:6px;border: none;}
   #countButton:hover{background-color: #00FF33;}
   #addButton:hover{background-color:indianred;}
   #addButton{background-color: orange;font-weight: bold;border-radius: 4px;width: 116px;padding:6px;border: none;}
-  #playersBlocks{display: flex;flex-direction: column;margin-bottom: 12px;}
-  .playersBlock{align-items: center;width: 540px;margin:1px auto;}
+  #playersBlocks{margin-bottom: 12px;}
+  .playersBlock{position: relative;}
+  .spicyItems{padding: 0px 12px;height: 150px;overflow-x: hidden;}
+  .spicyItems div {display: flex;justify-content: space-between;}
+  .counter__value{width: 20px;margin-right: 12px;}
+  .counter label{margin-left: 12px;}
+  .blockNumber{width: 100px;height: 50px;position: absolute;background: aliceblue;opacity: .5;top: 70px;left: 170px;}
 </style>
